@@ -1,11 +1,13 @@
 # Bachelor thesis — data analysis
 
+**Location:** `/Users/jakubjanak/Desktop/SIT/Bakalarka/data-analysis`
+
 Download metrics from **Prometheus**, analyze in **Jupyter**, export figures/CSVs for the thesis.
 
 ## Setup
 
 ```bash
-cd data-analysis
+cd /Users/jakubjanak/Desktop/SIT/Bakalarka/data-analysis
 python3 -m venv .venv && source .venv/bin/activate   # optional
 pip install -r requirements.txt
 ```
@@ -22,16 +24,19 @@ export PROMETHEUS_URL="http://OTHER_HOST:9090"
 
 Or set `os.environ["PROMETHEUS_URL"]` in the first notebook cell.
 
-## Run the notebook
+## Run notebooks
 
-**Important:** start Jupyter so the working directory is **`data-analysis`** (the folder that contains `src/`):
+**Working directory must be `data-analysis`** (the folder that contains `src/`), otherwise `from src.prometheus_io` fails.
 
 ```bash
 cd /Users/jakubjanak/Desktop/SIT/Bakalarka/data-analysis
-jupyter notebook notebooks/01_prometheus_load_data.ipynb
+jupyter notebook notebooks/
 ```
 
-Then open `notebooks/01_prometheus_load_data.ipynb` and run all cells.
+| Notebook | Purpose |
+|----------|---------|
+| `notebooks/intensive_messaging_analysis.ipynb` | CPU + WebSocket gauges + k6 sender/receiver VUs (thesis plot) |
+| `notebooks/01_prometheus_load_data.ipynb` | Starter: connect, `up`, CPU, k6 examples |
 
 ## Layout
 
@@ -40,3 +45,4 @@ Then open `notebooks/01_prometheus_load_data.ipynb` and run all cells.
 | `src/prometheus_io.py` | `prom_query_range` / `prom_query_instant` → pandas |
 | `notebooks/` | Analysis notebooks |
 | `data/raw/` | Exported CSV snapshots |
+| `figures/` | Optional PNG/PDF exports |
